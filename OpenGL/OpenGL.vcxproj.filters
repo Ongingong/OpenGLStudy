@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\shader">
+      <UniqueIdentifier>{5be75c31-dcbe-41b1-bb03-e67ab3476164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\program">
+      <UniqueIdentifier>{bb8421f5-5aab-409c-968e-3ee455975530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\context">
+      <UniqueIdentifier>{05ac8dc7-6586-4854-8b4f-e30bbd99c258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\common">
+      <UniqueIdentifier>{ac3c67fb-8e31-4e7d-bf9c-606a2a742fe8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\glad\src\glad.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shader\shader.cpp">
+      <Filter>소스 파일\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\program\program.cpp">
+      <Filter>소스 파일\program</Filter>
+    </ClCompile>
+    <ClCompile Include="src\context\context.cpp">
+      <Filter>소스 파일\context</Filter>
+    </ClCompile>
+    <ClCompile Include="src\common\common.cpp">
+      <Filter>소스 파일\common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\shader\shader.h">
+      <Filter>소스 파일\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\program\program.h">
+      <Filter>소스 파일\program</Filter>
+    </ClInclude>
+    <ClInclude Include="src\context\context.h">
+      <Filter>소스 파일\context</Filter>
+    </ClInclude>
+    <ClInclude Include="src\common\common.h">
+      <Filter>소스 파일\common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\shader\simple.fs">
+      <Filter>소스 파일\shader</Filter>
+    </None>
+    <None Include="src\shader\simple.vs">
+      <Filter>소스 파일\shader</Filter>
+    </None>
+  </ItemGroup>
+</Project>
