@@ -31,6 +31,9 @@
     <Filter Include="소스 파일\vertex_layout">
       <UniqueIdentifier>{851c358b-7869-40ac-9234-307154940b55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\texture">
+      <UniqueIdentifier>{7fbd86fa-377f-41eb-a5e4-4a038f4709f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -57,6 +60,12 @@
     <ClCompile Include="src\vertex_layout\vertex_layout.cpp">
       <Filter>소스 파일\vertex_layout</Filter>
     </ClCompile>
+    <ClCompile Include="src\common\image.cpp">
+      <Filter>소스 파일\common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texture\texture.cpp">
+      <Filter>소스 파일\texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shader\shader.h">
@@ -76,6 +85,12 @@
     </ClInclude>
     <ClInclude Include="src\vertex_layout\vertex_layout.h">
       <Filter>소스 파일\vertex_layout</Filter>
+    </ClInclude>
+    <ClInclude Include="src\common\image.h">
+      <Filter>소스 파일\common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\texture\texture.h">
+      <Filter>소스 파일\texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
