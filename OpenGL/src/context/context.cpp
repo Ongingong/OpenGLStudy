@@ -14,37 +14,38 @@ ContextUPtr Context::Create()
 
 bool Context::Init()
 {
+
 	// Vertex data for a triangle
-    float vertices[] = {
-      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-       0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
-       0.5f,  0.5f, -0.5f, 1.0f, 1.0f,
-      -0.5f,  0.5f, -0.5f, 0.0f, 1.0f,
+    float vertices[] = { // pos.xyz, normal.xyz, texcoord.uv
+      -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f,
+       0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 1.0f, 0.0f,
+       0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f,
+      -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 0.0f, 1.0f,
 
-      -0.5f, -0.5f,  0.5f, 0.0f, 0.0f,
-       0.5f, -0.5f,  0.5f, 1.0f, 0.0f,
-       0.5f,  0.5f,  0.5f, 1.0f, 1.0f,
-      -0.5f,  0.5f,  0.5f, 0.0f, 1.0f,
+      -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f,
+       0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f, 1.0f, 0.0f,
+       0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f,
+      -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f, 0.0f, 1.0f,
 
-      -0.5f,  0.5f,  0.5f, 1.0f, 0.0f,
-      -0.5f,  0.5f, -0.5f, 1.0f, 1.0f,
-      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-      -0.5f, -0.5f,  0.5f, 0.0f, 0.0f,
+      -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f,
+      -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f, 1.0f, 1.0f,
+      -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f,
+      -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f, 0.0f, 0.0f,
 
-       0.5f,  0.5f,  0.5f, 1.0f, 0.0f,
-       0.5f,  0.5f, -0.5f, 1.0f, 1.0f,
-       0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-       0.5f, -0.5f,  0.5f, 0.0f, 0.0f,
+       0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f,
+       0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f, 1.0f, 1.0f,
+       0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f,
+       0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f, 0.0f, 0.0f,
 
-      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-       0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
-       0.5f, -0.5f,  0.5f, 1.0f, 0.0f,
-      -0.5f, -0.5f,  0.5f, 0.0f, 0.0f,
+      -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f,
+       0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f, 1.0f, 1.0f,
+       0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f,
+      -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f, 0.0f, 0.0f,
 
-      -0.5f,  0.5f, -0.5f, 0.0f, 1.0f,
-       0.5f,  0.5f, -0.5f, 1.0f, 1.0f,
-       0.5f,  0.5f,  0.5f, 1.0f, 0.0f,
-      -0.5f,  0.5f,  0.5f, 0.0f, 0.0f,
+      -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f,
+       0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f, 1.0f, 1.0f,
+       0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f,
+      -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f,
     };
 
     uint32_t indices[] = {
@@ -57,12 +58,12 @@ bool Context::Init()
     };
 
     m_vertexLayout = VertexLayout::Create();
-    m_vertexBuffer = Buffer::CreateWithData(GL_ARRAY_BUFFER, GL_STATIC_DRAW, vertices, sizeof(float) * 120);
+    m_vertexBuffer = Buffer::CreateWithData(GL_ARRAY_BUFFER, GL_STATIC_DRAW, vertices, sizeof(float) * 8 * 6 * 4);
 
 
-    m_vertexLayout->SetAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
-    //m_vertexLayout->SetAttrib(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, sizeof(float) * 3);
-    m_vertexLayout->SetAttrib(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, sizeof(float) * 3);
+    m_vertexLayout->SetAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0);
+    m_vertexLayout->SetAttrib(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, sizeof(float) * 3);
+    m_vertexLayout->SetAttrib(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, sizeof(float) * 6);
 
     m_indexBuffer = Buffer::CreateWithData(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW, indices, sizeof(uint32_t) * 36);
 
@@ -77,33 +78,38 @@ bool Context::Init()
     spdlog::info("Vertex Shader ID : {}", vertShader->Get());
     spdlog::info("Fragment Shader ID : {}", fragShader->Get());
 
+    // Load Texture
+    m_material.diffuse = Texture::CreateFromImage( Image::Load("resource/tex/container2.png").get());
+    m_material.specular = Texture::CreateFromImage( Image::Load("resource/tex/container2_specular.png").get());
     // Create program
-    m_program = Program::Create({ vertShader, fragShader });
+    m_simpleProgram = Program::Create(vs_simple_path, fs_simple_path);
+    if (!m_simpleProgram)
+        return false;
+
+    m_program = Program::Create(vs_path, fs_path);
     if (!m_program)
-    {
         return false;
-    }
-    spdlog::info("Program ID : {}", m_program->Get());
 
-    auto image = Image::Load("resource/tex/container.jpg");
-    if (!image)
-        return false;
-    m_texture = Texture::CreateFromImage(image.get());
+ //   auto image = Image::Load("resource/tex/container.jpg");
+ //   if (!image)
+ //       return false;
+ //   m_texture = Texture::CreateFromImage(image.get());
 
-    auto image2 = Image::Load("resource/tex/awesomeface.png");
-    if (!image2)
-        return false;
-	m_texture2 = Texture::CreateFromImage(image2.get());
+ //   auto image2 = Image::Load("resource/tex/awesomeface.png");
+ //   if (!image2)
+ //       return false;
+	//m_texture2 = Texture::CreateFromImage(image2.get());
 
-    glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_texture->Get());
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, m_texture2->Get());
+ //   glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, m_texture->Get());
+ //   glActiveTexture(GL_TEXTURE1);
+ //   glBindTexture(GL_TEXTURE_2D, m_texture2->Get());
 
-	m_program->Use();
-	m_program->SetUniform("tex", 0);
-	m_program->SetUniform("tex2", 1);
+	//m_program->Use();
+	//m_program->SetUniform("tex", 0);
+	//m_program->SetUniform("tex2", 1);
 
+    glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
     glEnable(GL_DEPTH_TEST);
 
     return true;
@@ -112,6 +118,19 @@ bool Context::Init()
 void Context::Render()
 {
     if (ImGui::Begin("ui window")) {
+        if (ImGui::CollapsingHeader("light", ImGuiTreeNodeFlags_DefaultOpen)) {
+            ImGui::DragFloat3("l.position", glm::value_ptr(m_light.position), 0.01f);
+            ImGui::ColorEdit3("l.ambient", glm::value_ptr(m_light.ambient));
+            ImGui::ColorEdit3("l.diffuse", glm::value_ptr(m_light.diffuse));
+            ImGui::ColorEdit3("l.specular", glm::value_ptr(m_light.specular));
+        }
+
+        if (ImGui::CollapsingHeader("material", ImGuiTreeNodeFlags_DefaultOpen)) {
+            ImGui::DragFloat("m.shininess", &m_material.shininess, 1.0f, 1.0f, 256.0f);
+        }
+
+        ImGui::Checkbox("animation", &m_animation);
+
         if (ImGui::ColorEdit4("clear color", glm::value_ptr(m_clearColor))) {
             glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
         }
@@ -128,6 +147,21 @@ void Context::Render()
     }
     ImGui::End();
 
+    m_program->Use();
+    m_program->SetUniform("viewPos", m_cameraPos);
+    m_program->SetUniform("light.position", m_light.position);
+    m_program->SetUniform("light.ambient", m_light.ambient);
+    m_program->SetUniform("light.diffuse", m_light.diffuse);
+    m_program->SetUniform("light.specular", m_light.specular);
+    m_program->SetUniform("material.diffuse", 0);
+    m_program->SetUniform("material.specular", 1);
+    m_program->SetUniform("material.shininess", m_material.shininess);
+
+    glActiveTexture(GL_TEXTURE0);
+    m_material.diffuse->Bind();
+    glActiveTexture(GL_TEXTURE1);
+    m_material.specular->Bind();
+
     std::vector<glm::vec3> cubePositions = {
         glm::vec3(0.0f, 0.0f, 0.0f),
         glm::vec3(2.0f, 5.0f, -15.0f),
@@ -142,7 +176,6 @@ void Context::Render()
     };
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	m_program->Use();
 
     auto projection = glm::perspective(glm::radians(45.0f),
        (float)(m_width) / (float)(m_height), 0.01f, 40.0f);
@@ -153,17 +186,30 @@ void Context::Render()
         * glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
 
     auto view = lookAt(m_cameraPos, m_cameraPos + m_cameraFront, m_cameraUp);
+    
+    auto lightModelTransform =
+        glm::translate(glm::mat4(1.0), m_light.position) *
+        glm::scale(glm::mat4(1.0), glm::vec3(0.1f));
 
+    // Draw light source
+    m_simpleProgram->Use();
+    m_simpleProgram->SetUniform("color", glm::vec4(m_light.ambient + m_light.diffuse, 1.0f));
+    m_simpleProgram->SetUniform("transform", projection * view * lightModelTransform);
+    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+	// Draw cubes
+    m_program->Use();
     for (size_t i = 0; i < cubePositions.size(); i++) {
         auto& pos = cubePositions[i];
         auto model = glm::translate(glm::mat4(1.0f), pos);
         model = glm::rotate(model,
-            glm::radians((float)glfwGetTime() * 120.0f + 20.0f * (float)i),
+            glm::radians( (m_animation ? (float)glfwGetTime() : 0.0f) * 120.0f + 20.0f * (float)i),
             glm::vec3(1.0f, 0.5f, 0.0f));
 
         auto transform = projection * view * model;
-        
+        m_program->SetUniform("modelTransform", model);
         m_program->SetUniform("transform", transform);
+
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
     }
 }

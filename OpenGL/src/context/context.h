@@ -23,7 +23,10 @@ public:
 private:
     Context() {};
     bool Init();
+
+	// Shader program
     ProgramPtr m_program{ nullptr };
+    ProgramUPtr m_simpleProgram;
 
     // Window
     int m_width{ 1920 };
@@ -39,7 +42,7 @@ private:
 	TextureUPtr m_texture2;
 
     // Color
-    glm::vec4 m_clearColor{ glm::vec4(0.18f, 0.18f, 0.18f, 1.0f) };
+    glm::vec4 m_clearColor{ glm::vec4(0.5f, 0.5f, 0.5f, 1.0f) };
 
     // Camera
     float m_cameraPitch{ 0.0f };
@@ -50,9 +53,31 @@ private:
 
     bool m_cameraControl{ false };
     glm::vec2 m_prevMousePos{ glm::vec2(0.0f) };
+    
+    // light parameter
+    struct Light {
+        glm::vec3 position{ glm::vec3(3.0f, 3.0f, 3.0f) };
+        glm::vec3 ambient{ glm::vec3(0.1f, 0.1f, 0.1f) };
+        glm::vec3 diffuse{ glm::vec3(0.5f, 0.5f, 0.5f) };
+        glm::vec3 specular{ glm::vec3(1.0f, 1.0f, 1.0f) };
+    };
+    Light m_light;
 
-    std::string vs_path = "src/shader/simple.vs";
-    std::string fs_path = "src/shader/simple.fs";
+    // material parameter
+    struct Material {
+        TextureUPtr diffuse;
+        TextureUPtr specular;
+        float shininess{ 32.0f };
+    };
+    Material m_material;
+
+    // animation
+    bool m_animation{ true };
+
+    std::string vs_path = "src/shader/lighting.vs";
+    std::string fs_path = "src/shader/lighting.fs";
+	std::string vs_simple_path = "src/shader/simple.vs";
+	std::string fs_simple_path = "src/shader/simple.fs";
 };
 
 #endif
