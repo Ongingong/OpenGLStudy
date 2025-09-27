@@ -15,25 +15,55 @@ bool Context::Init()
 {
 	// Vertex data for a triangle
     float vertices[] = {
-        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
-        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+       0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
+       0.5f,  0.5f, -0.5f, 1.0f, 1.0f,
+      -0.5f,  0.5f, -0.5f, 0.0f, 1.0f,
+
+      -0.5f, -0.5f,  0.5f, 0.0f, 0.0f,
+       0.5f, -0.5f,  0.5f, 1.0f, 0.0f,
+       0.5f,  0.5f,  0.5f, 1.0f, 1.0f,
+      -0.5f,  0.5f,  0.5f, 0.0f, 1.0f,
+
+      -0.5f,  0.5f,  0.5f, 1.0f, 0.0f,
+      -0.5f,  0.5f, -0.5f, 1.0f, 1.0f,
+      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+      -0.5f, -0.5f,  0.5f, 0.0f, 0.0f,
+
+       0.5f,  0.5f,  0.5f, 1.0f, 0.0f,
+       0.5f,  0.5f, -0.5f, 1.0f, 1.0f,
+       0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+       0.5f, -0.5f,  0.5f, 0.0f, 0.0f,
+
+      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+       0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
+       0.5f, -0.5f,  0.5f, 1.0f, 0.0f,
+      -0.5f, -0.5f,  0.5f, 0.0f, 0.0f,
+
+      -0.5f,  0.5f, -0.5f, 0.0f, 1.0f,
+       0.5f,  0.5f, -0.5f, 1.0f, 1.0f,
+       0.5f,  0.5f,  0.5f, 1.0f, 0.0f,
+      -0.5f,  0.5f,  0.5f, 0.0f, 0.0f,
     };
-    uint32_t indices[] = { // note that we start from 0!
-        0, 1, 3, // first triangle
-        1, 2, 3, // second triangle
+
+    uint32_t indices[] = {
+       0,  2,  1,  2,  0,  3,
+       4,  5,  6,  6,  7,  4,
+       8,  9, 10, 10, 11,  8,
+      12, 14, 13, 14, 12, 15,
+      16, 17, 18, 18, 19, 16,
+      20, 22, 21, 22, 20, 23,
     };
 
     m_vertexLayout = VertexLayout::Create();
-    m_vertexBuffer = Buffer::CreateWithData(GL_ARRAY_BUFFER, GL_STATIC_DRAW, vertices, sizeof(float) * 32);
+    m_vertexBuffer = Buffer::CreateWithData(GL_ARRAY_BUFFER, GL_STATIC_DRAW, vertices, sizeof(float) * 120);
 
 
-    m_vertexLayout->SetAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0);
-    m_vertexLayout->SetAttrib(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, sizeof(float) * 3);
-    m_vertexLayout->SetAttrib(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, sizeof(float) * 6);
+    m_vertexLayout->SetAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
+    //m_vertexLayout->SetAttrib(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, sizeof(float) * 3);
+    m_vertexLayout->SetAttrib(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, sizeof(float) * 3);
 
-    m_indexBuffer = Buffer::CreateWithData(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW, indices, sizeof(indices));
+    m_indexBuffer = Buffer::CreateWithData(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW, indices, sizeof(uint32_t) * 36);
 
     // Create shaders
     ShaderPtr vertShader = Shader::CreateFromFile(vs_path, GL_VERTEX_SHADER);
@@ -72,20 +102,125 @@ bool Context::Init()
     glBindTexture(GL_TEXTURE_2D, m_texture2->Get());
 
 	m_program->Use();
-	glUniform1i(glGetUniformLocation(m_program->Get(), "tex"), 0);
-    glUniform1i(glGetUniformLocation(m_program->Get(), "tex2"), 1);
+	m_program->SetUniform("tex", 0);
+	m_program->SetUniform("tex2", 1);
+
+    //// x축으로 -55도 회전
+    //auto model = glm::rotate(glm::mat4(1.0f),
+    //    glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    //// 카메라는 원점으로부터 z축 방향으로 -3만큼 떨어짐
+    //auto view = glm::translate(glm::mat4(1.0f),
+    //    glm::vec3(0.0f, 0.0f, -3.0f));
+    //// 종횡비 4:3, 세로화각 45도의 원근 투영
+    //auto projection = glm::perspective(glm::radians(45.0f),
+    //    (float)1920 / (float)1080, 0.01f, 10.0f);
+    //auto transform = projection * view * model;
+    //m_program->SetUniform("transform", transform);
+
+    glEnable(GL_DEPTH_TEST);
 
     return true;
 }
 
 void Context::Render()
 {
-    if (m_program)
-    {
-        glClear(GL_COLOR_BUFFER_BIT);
+    std::vector<glm::vec3> cubePositions = {
+        glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec3(2.0f, 5.0f, -15.0f),
+        glm::vec3(-1.5f, -2.2f, -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3(2.4f, -0.4f, -3.5f),
+        glm::vec3(-1.7f, 3.0f, -7.5f),
+        glm::vec3(1.3f, -2.0f, -2.5f),
+        glm::vec3(1.5f, 2.0f, -2.5f),
+        glm::vec3(1.5f, 0.2f, -1.5f),
+        glm::vec3(-1.3f, 1.0f, -1.5f),
+    };
 
-        m_program->Use();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	m_program->Use();
 
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    auto projection = glm::perspective(glm::radians(45.0f),
+       (float)(m_width) / (float)(m_height), 0.01f, 40.0f);
+
+    m_cameraFront =
+        glm::rotate(glm::mat4(1.0f), glm::radians(m_cameraYaw), glm::vec3(0.0f, 1.0f, 0.0f)) 
+        * glm::rotate(glm::mat4(1.0f), glm::radians(m_cameraPitch), glm::vec3(1.0f, 0.0f, 0.0f)) 
+        * glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
+
+    auto view = lookAt(m_cameraPos, m_cameraPos + m_cameraFront, m_cameraUp);
+
+    for (size_t i = 0; i < cubePositions.size(); i++) {
+        auto& pos = cubePositions[i];
+        auto model = glm::translate(glm::mat4(1.0f), pos);
+        model = glm::rotate(model,
+            glm::radians((float)glfwGetTime() * 120.0f + 20.0f * (float)i),
+            glm::vec3(1.0f, 0.5f, 0.0f));
+
+        auto transform = projection * view * model;
+        
+        m_program->SetUniform("transform", transform);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
     }
-}   
+}
+
+void Context::ProcessInput(GLFWwindow* window)
+{ 
+    if (!m_cameraControl)
+        return;
+
+        float cameraSpeed = 0.05f; // adjust accordingly
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        m_cameraPos += cameraSpeed * m_cameraFront;
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        m_cameraPos -= cameraSpeed * m_cameraFront;
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        m_cameraPos -= glm::normalize(glm::cross(m_cameraFront, m_cameraUp)) * cameraSpeed;
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		m_cameraPos += glm::normalize(glm::cross(m_cameraFront, m_cameraUp)) * cameraSpeed;
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+        m_cameraPos += cameraSpeed * m_cameraUp;
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+        m_cameraPos -= cameraSpeed * m_cameraUp;
+}
+
+void Context::Reshape(int width, int height)
+{
+    m_width = width;
+    m_height = height;
+    glViewport(0, 0, m_width, m_height);
+}
+
+void Context::MouseMove(double x, double y) {
+   
+    if (!m_cameraControl)
+        return;
+
+    auto pos = glm::vec2((float)x, (float)y);
+    auto deltaPos = pos - m_prevMousePos;
+
+    const float cameraRotSpeed = 0.4f;
+    m_cameraYaw -= deltaPos.x * cameraRotSpeed;
+    m_cameraPitch -= deltaPos.y * cameraRotSpeed;
+
+    if (m_cameraYaw < 0.0f)   m_cameraYaw += 360.0f;
+    if (m_cameraYaw > 360.0f) m_cameraYaw -= 360.0f;
+
+    if (m_cameraPitch > 89.0f)  m_cameraPitch = 89.0f;
+    if (m_cameraPitch < -89.0f) m_cameraPitch = -89.0f;
+
+    m_prevMousePos = pos;
+}
+
+void Context::MouseButton(int button, int action, double x, double y)
+{
+    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+        if (action == GLFW_PRESS) {
+            m_cameraControl = true;
+            m_prevMousePos = glm::vec2((float)x, (float)y);
+        }
+        else if (action == GLFW_RELEASE) {
+            m_cameraControl = false;
+        }
+	}
+}
