@@ -25,6 +25,12 @@
     <Filter Include="소스 파일\common">
       <UniqueIdentifier>{ac3c67fb-8e31-4e7d-bf9c-606a2a742fe8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\buffer">
+      <UniqueIdentifier>{2ffc3d3e-a127-4427-98ee-b24553eb0c0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\vertex_layout">
+      <UniqueIdentifier>{851c358b-7869-40ac-9234-307154940b55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -45,6 +51,12 @@
     <ClCompile Include="src\common\common.cpp">
       <Filter>소스 파일\common</Filter>
     </ClCompile>
+    <ClCompile Include="src\buffer\buffer.cpp">
+      <Filter>소스 파일\buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vertex_layout\vertex_layout.cpp">
+      <Filter>소스 파일\vertex_layout</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shader\shader.h">
@@ -58,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="src\common\common.h">
       <Filter>소스 파일\common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\buffer\buffer.h">
+      <Filter>소스 파일\buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vertex_layout\vertex_layout.h">
+      <Filter>소스 파일\vertex_layout</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -133,17 +133,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dependencies\glad\src\glad.c" />
+    <ClCompile Include="src\buffer\buffer.cpp" />
     <ClCompile Include="src\common\common.cpp" />
     <ClCompile Include="src\context\context.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\program\program.cpp" />
     <ClCompile Include="src\shader\shader.cpp" />
+    <ClCompile Include="src\vertex_layout\vertex_layout.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\buffer\buffer.h" />
     <ClInclude Include="src\common\common.h" />
     <ClInclude Include="src\context\context.h" />
     <ClInclude Include="src\program\program.h" />
     <ClInclude Include="src\shader\shader.h" />
+    <ClInclude Include="src\vertex_layout\vertex_layout.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shader\simple.fs" />
