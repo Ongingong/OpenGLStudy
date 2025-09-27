@@ -34,6 +34,9 @@
     <Filter Include="소스 파일\texture">
       <UniqueIdentifier>{7fbd86fa-377f-41eb-a5e4-4a038f4709f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\imgui">
+      <UniqueIdentifier>{327c8d95-c7d2-4f44-8a89-41f82d3788d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -65,6 +68,27 @@
     </ClCompile>
     <ClCompile Include="src\texture\texture.cpp">
       <Filter>소스 파일\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_widgets.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_tables.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_impl_opengl3.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_impl_glfw.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_draw.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_demo.cpp">
+      <Filter>소스 파일\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui.cpp">
+      <Filter>소스 파일\imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

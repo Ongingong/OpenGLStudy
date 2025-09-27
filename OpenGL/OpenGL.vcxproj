@@ -106,7 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\stb\include;$(ProjectDir)src;$(ProjectDir)dependencies\spdlog\include;$(ProjectDir)dependencies\GLFW\include;%(AdditionalIncludeDirectories);$(ProjectDir)dependencies\glad\include;$(ProjectDir)dependencies\glm\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\stb\include;$(ProjectDir)src;$(ProjectDir)dependencies\spdlog\include;$(ProjectDir)dependencies\GLFW\include;%(AdditionalIncludeDirectories);$(ProjectDir)dependencies\glad\include;$(ProjectDir)dependencies\glm\include;$(ProjectDir)dependencies\imgui\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -133,6 +133,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dependencies\glad\src\glad.c" />
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui.cpp" />
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_demo.cpp" />
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_tables.cpp" />
+    <ClCompile Include="dependencies\imgui\include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\buffer\buffer.cpp" />
     <ClCompile Include="src\common\common.cpp" />
     <ClCompile Include="src\common\image.cpp" />

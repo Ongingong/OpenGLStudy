@@ -1,5 +1,8 @@
 ﻿#include "common/common.h"
 #include "context/context.h"
+#include "imgui/imgui_impl_opengl3.h"
+#include "imgui/imgui_impl_glfw.h"
+
 
 void OnFramebufferSizeChange(GLFWwindow* window, int width, int height) {
     auto context = (Context*)glfwGetWindowUserPointer(window);
@@ -9,14 +12,7 @@ void OnFramebufferSizeChange(GLFWwindow* window, int width, int height) {
 
 void OnKeyEvent(GLFWwindow* window,
     int key, int scancode, int action, int mods) {
-    SPDLOG_INFO("key: {}, scancode: {}, action: {}, mods: {}{}{}",
-        key, scancode,
-        action == GLFW_PRESS ? "Pressed" :
-        action == GLFW_RELEASE ? "Released" :
-        action == GLFW_REPEAT ? "Repeat" : "Unknown",
-        mods & GLFW_MOD_CONTROL ? "C" : "-",
-        mods & GLFW_MOD_SHIFT ? "S" : "-",
-        mods & GLFW_MOD_ALT ? "A" : "-");
+    ImGui_ImplGlfw_KeyCallback(window, key, scancode, action, mods);
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
@@ -28,10 +24,19 @@ void OnCursorPos(GLFWwindow* window, double x, double y) {
 }
 
 void OnMouseButton(GLFWwindow* window, int button, int action, int modifier) {
+    ImGui_ImplGlfw_MouseButtonCallback(window, button, action, modifier);
     auto context = (Context*)glfwGetWindowUserPointer(window);
     double x, y;
     glfwGetCursorPos(window, &x, &y);
     context->MouseButton(button, action, x, y);
+}
+
+void OnCharEvent(GLFWwindow* window, unsigned int ch) {
+    ImGui_ImplGlfw_CharCallback(window, ch);
+}
+
+void OnScroll(GLFWwindow* window, double xoffset, double yoffset) {
+    ImGui_ImplGlfw_ScrollCallback(window, xoffset, yoffset);
 }
 
 int main(int argc, char* argv[])
@@ -69,6 +74,12 @@ int main(int argc, char* argv[])
     spdlog::info("GLAD initialized successfully");
     spdlog::info("OpenGL Version: {}", (const char*)glGetString(GL_VERSION));
 
+    auto imguiContext = ImGui::CreateContext();
+    ImGui::SetCurrentContext(imguiContext);
+    ImGui_ImplGlfw_InitForOpenGL(window, false);
+    ImGui_ImplOpenGL3_Init();
+    ImGui_ImplOpenGL3_CreateDeviceObjects();
+
     // Init Context
     auto context = Context::Create();
     if (!context)
@@ -83,19 +94,32 @@ int main(int argc, char* argv[])
     OnFramebufferSizeChange(window, WINDOW_WIDTH, WINDOW_HEIGHT);
     glfwSetFramebufferSizeCallback(window, OnFramebufferSizeChange);
     glfwSetKeyCallback(window, OnKeyEvent);
+    glfwSetCharCallback(window, OnCharEvent);
     glfwSetCursorPosCallback(window, OnCursorPos );
 	glfwSetMouseButtonCallback(window, OnMouseButton);
+    glfwSetScrollCallback(window, OnScroll);
 
     spdlog::info("GLFW Main Loop");
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
 		context->ProcessInput(window);
         context->Render();
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(window);
     }
 
     context.reset();
+
+    ImGui_ImplOpenGL3_DestroyDeviceObjects();
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext(imguiContext);
 
     glfwDestroyWindow(window);
     glfwTerminate();
