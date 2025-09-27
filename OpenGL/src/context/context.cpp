@@ -14,10 +14,10 @@ bool Context::Init()
 {
 	// Vertex data for a triangle
     float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-          0.5f, -0.5f, 0.0f,
-		 0.5f,  0.5f, 0.0f,
-         -0.5f, 0.5f, 0.0f
+        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, // top right, red
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right, green
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom left, blue
+        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f // top left, yellow
 	};
 
     int indices[] = {
@@ -28,7 +28,8 @@ bool Context::Init()
     m_vertexLayout = VertexLayout::Create();
     m_vertexBuffer = Buffer::CreateWithData(GL_ARRAY_BUFFER, GL_STATIC_DRAW, vertices, sizeof(vertices));
 
-	m_vertexLayout->SetAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+	m_vertexLayout->SetAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, 0);
+    m_vertexLayout->SetAttrib(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, sizeof(float) * 3);
 
     m_indexBuffer = Buffer::CreateWithData(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW, indices, sizeof(indices));
 
@@ -51,6 +52,7 @@ bool Context::Init()
     }
     spdlog::info("Program ID : {}", m_program->Get());
 
+
     glClearColor(0.18f, 0.18f, 0.18f, 1.0f);
 
     return true;
@@ -61,7 +63,9 @@ void Context::Render()
     if (m_program)
     {
         glClear(GL_COLOR_BUFFER_BIT);
+
         m_program->Use();
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
     }
 }   
