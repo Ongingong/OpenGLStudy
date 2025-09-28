@@ -37,6 +37,9 @@
     <Filter Include="소스 파일\imgui">
       <UniqueIdentifier>{327c8d95-c7d2-4f44-8a89-41f82d3788d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\mesh">
+      <UniqueIdentifier>{95ce1411-b3b7-470d-917c-2ae5daaefdee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -90,6 +93,12 @@
     <ClCompile Include="dependencies\imgui\include\imgui\imgui.cpp">
       <Filter>소스 파일\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="src\mesh\mesh.cpp">
+      <Filter>소스 파일\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mesh\model.cpp">
+      <Filter>소스 파일\mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shader\shader.h">
@@ -115,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="src\texture\texture.h">
       <Filter>소스 파일\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mesh\mesh.h">
+      <Filter>소스 파일\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mesh\model.h">
+      <Filter>소스 파일\mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

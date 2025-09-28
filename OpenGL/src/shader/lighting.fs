@@ -16,16 +16,16 @@ struct Light {
     vec3 specular;
 };
 uniform Light light;
- 
+
 struct Material {
     sampler2D diffuse;
     sampler2D specular;
     float shininess;
 };
 uniform Material material;
- 
+
 void main() {
-    vec3 texColor = texture(material.diffuse, texCoord).xyz;
+    vec3 texColor = texture2D(material.diffuse, texCoord).xyz;
     vec3 ambient = texColor * light.ambient;
 
     float dist = length(light.position - position);
@@ -33,9 +33,11 @@ void main() {
     float attenuation = 1.0 / dot(distPoly, light.attenuation);
     vec3 lightDir = (light.position - position) / dist;
 
-    float theta = dot(lightDir, normalize(-light.direction));
-    float intensity = clamp((theta - light.cutoff[1]) / (light.cutoff[0] - light.cutoff[1]), 0.0, 1.0);
     vec3 result = ambient;
+    float theta = dot(lightDir, normalize(-light.direction));
+    float intensity = clamp(
+        (theta - light.cutoff[1]) / (light.cutoff[0] - light.cutoff[1]),
+        0.0, 1.0);
 
     if (intensity > 0.0) {
         vec3 pixelNorm = normalize(normal);
@@ -52,6 +54,5 @@ void main() {
     }
 
     result *= attenuation;
-
     fragColor = vec4(result, 1.0);
 }

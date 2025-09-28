@@ -106,15 +106,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\stb\include;$(ProjectDir)src;$(ProjectDir)dependencies\spdlog\include;$(ProjectDir)dependencies\GLFW\include;%(AdditionalIncludeDirectories);$(ProjectDir)dependencies\glad\include;$(ProjectDir)dependencies\glm\include;$(ProjectDir)dependencies\imgui\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\assimp\include;$(ProjectDir)dependencies\stb\include;$(ProjectDir)src;$(ProjectDir)dependencies\spdlog\include;$(ProjectDir)dependencies\GLFW\include;%(AdditionalIncludeDirectories);$(ProjectDir)dependencies\glad\include;$(ProjectDir)dependencies\glm\include;$(ProjectDir)dependencies\imgui\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)dependencies\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)dependencies\assimp\lib;$(ProjectDir)dependencies\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib; assimp-vc143-mtd.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,6 +145,8 @@
     <ClCompile Include="src\common\image.cpp" />
     <ClCompile Include="src\context\context.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mesh\mesh.cpp" />
+    <ClCompile Include="src\mesh\model.cpp" />
     <ClCompile Include="src\program\program.cpp" />
     <ClCompile Include="src\shader\shader.cpp" />
     <ClCompile Include="src\texture\texture.cpp" />
@@ -155,6 +157,8 @@
     <ClInclude Include="src\common\common.h" />
     <ClInclude Include="src\common\image.h" />
     <ClInclude Include="src\context\context.h" />
+    <ClInclude Include="src\mesh\mesh.h" />
+    <ClInclude Include="src\mesh\model.h" />
     <ClInclude Include="src\program\program.h" />
     <ClInclude Include="src\shader\shader.h" />
     <ClInclude Include="src\texture\texture.h" />
